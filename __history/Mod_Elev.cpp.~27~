@@ -1,0 +1,171 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Mod_Elev.h"
+#include "Parcurgere_Lectie.h"
+#include "Testare_Cunostinte.h"
+#include "Meniu.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TModElev *ModElev;
+int OK=1,prof_cur=1,prof_tot=0;
+
+
+//---------------------------------------------------------------------------
+__fastcall TModElev::TModElev(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TModElev::FormActivate(TObject *Sender)
+{
+if (OK)
+{
+char temp[100];
+strcpy(temp,Meniu1->login_path);
+strcat(temp,"Profesori.res");
+ifstream f(temp);
+while (!f.eof())
+{
+	f.getline (temp,100);
+	if (temp!="")
+		strcpy(profesori[++prof_tot],temp);
+}
+prof_tot--;
+f.close();
+load(1);
+OK=0;
+}
+}
+//---------------------------------------------------------------------------
+void __fastcall TModElev::Prev_NextClick(TObject *Sender)
+{
+if (prof_cur<prof_tot)
+{
+ShowMessage(prof_tot);
+prof_cur++;
+load(prof_cur);
+
+}
+}
+//---------------------------------------------------------------------------
+void __fastcall TModElev::Prev_BackClick(TObject *Sender)
+{
+if (prof_cur>1)
+{
+prof_cur--;
+load(prof_cur);
+
+}
+}
+//---------------------------------------------------------------------------
+void __fastcall TModElev::Parcurgere_LectieClick(TObject *Sender)
+{
+char a[200];
+for (int i=0; i <=30; i++)
+{
+	if (Lectii_List->ItemIndex==i)
+	{
+	   strcpy(a,"Profesor/");
+	   strcat(a,profesori[prof_cur]);
+	   strcat(a,"/Lectii/Lectii.res");
+	   ifstream fin(a);
+	   for (int j = 1; j <= 30; j++)
+	   {
+	   fin.get(a,100); fin.get();
+	   if (i+1==j) break;
+	   }
+	}
+}
+strcpy(titlu,a);
+strcpy(locatie,"Profesor/");
+strcat(locatie,profesori[prof_cur]);
+strcat(locatie,"/Lectii/");
+strcat(locatie,a);
+ParcurgereLectie->Show();
+ModElev->Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModElev::Testare_CunostinteClick(TObject *Sender)
+{
+char a[100];
+for (int i=0; i <=30; i++)
+{
+	if (Lectii_List->ItemIndex==i)
+	{
+		strcpy(a,"Profesor/");
+	   strcat(a,profesori[prof_cur]);
+	   strcat(a,"/Lectii/Lectii.res");
+	   ifstream fin(a);
+	   for (int j = 1; j <= 30; j++)
+	   {
+	   fin.get(a,100); fin.get();
+	   if (i+1==j) break;
+	   }
+	}
+}
+strcpy(titlu,a);
+strcpy(locatie,"Profesor/");
+strcat(locatie,profesori[prof_cur]);
+strcat(locatie,"/Lectii/");
+strcat(locatie,a);
+strcat(locatie,"/Test/1.res");
+ShowMessage(locatie);
+
+ifstream f(locatie);
+/*strcpy(titlu,a);
+strcpy(locatie,"/Profesor/");
+strcat(locatie,profesori[prof_cur]);
+strcat(locatie,"/Lectii/");
+strcat(locatie,a);
+strcat(locatie,"/Test/rezultat.res");
+ShowMessage(locatie);
+
+ifstream fin(locatie);   */
+
+if (f){// && !fin) {
+strcpy(titlu,a);
+strcpy(locatie,Meniu1->login_path);
+strcat(locatie,"Profesor/");
+strcat(locatie,profesori[prof_cur]);
+strcat(locatie,"/Lectii/");
+strcat(locatie,a);
+strcat(locatie,"/Test/");
+ShowMessage(locatie);
+TestareCunostinte->Show();
+ModElev->Close();
+}
+
+/*else if (fin)
+{
+while (!fin.eof())
+{
+fin.get(a,100);
+fin.get();
+}
+ShowMessage(String("Ai mai dat o data testul!\n")+String(a));
+
+}*/
+f.close();
+//fin.close();
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModElev::Finalizare_BGClick(TObject *Sender)
+{
+Meniu1->Show();
+ModElev->Close();
+OK=0;
+}
+//---------------------------------------------------------------------------
+

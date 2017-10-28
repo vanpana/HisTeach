@@ -1,0 +1,66 @@
+object ListaProf: TListaProf
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = None
+  Caption = 'Form1'
+  ClientHeight = 387
+  ClientWidth = 367
+  Fill.Color = xFF1B7CCC
+  Fill.Kind = Solid
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object Lista: TListBox
+    Align = Scale
+    Position.X = 6.500000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 369.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    ShowScrollBars = False
+    DisableFocusEffect = True
+    Items.Strings = (
+      'da'
+      'da'
+      'da'
+      'da'
+      'da')
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    ShowCheckboxes = True
+    Sorted = True
+  end
+  object Finish: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          00C5494441546843EDD3D109C2301485E1E8048EE0088EE466BA5147D00D7403
+          BD97E640090D4DDA879C0BE783438A2FF5A76D12111111915E77DB63BE8CCB23
+          7E79616396114D31E77C32A9BD4EA77C86B0F6247C4F5B188A60A108168A6031
+          34E266BBCC97870C8FF8D826DB91188A08DC746FCCF06FE26D2B6FDE1B43F161
+          FB13F9DACA3FD11A4311017B63A822A0378632025A63A823602B264404D4625E
+          2BBFF92823A016538E3A02B6624244402D265404943121230031A123E09A4F11
+          1111117129FD017790C1E3DCECCA160000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Checkmark-50.png'
+      end>
+    Align = Scale
+    Position.X = 320.000000000000000000
+    Position.Y = 336.000000000000000000
+    Size.Width = 41.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = FinishClick
+  end
+end

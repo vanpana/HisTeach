@@ -1,0 +1,48 @@
+object PopUpCreare: TPopUpCreare
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = None
+  Caption = 'Confirmare'
+  ClientHeight = 119
+  ClientWidth = 519
+  Fill.Color = xFF8EBA20
+  Fill.Kind = Solid
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Text: TLabel
+    StyledSettings = [FontColor]
+    Position.X = 16.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 497.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 31.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Esti sigur ca vrei sa abandonezi lectia?'
+  end
+  object da: TButton
+    Position.X = 344.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 72.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Da'
+    OnClick = daClick
+  end
+  object nu: TButton
+    Position.X = 424.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 72.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Text = 'Nu'
+    OnClick = nuClick
+  end
+end

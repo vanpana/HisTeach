@@ -1,0 +1,545 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Mod_Profesor.h"
+#include "Meniu.h"
+#include "Adaugare_Lectie.h"
+#include "Modificare_Lectie.h"
+#include "Creare_Test.h"
+
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TModProfesor *ModProfesor;
+int total=0,pathc=1,pg_tot=0,x=0; //prima deschidere
+char path[200]; //path preview
+//---------------------------------------------------------------------------
+__fastcall TModProfesor::TModProfesor(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::FormActivate(TObject *Sender)
+{
+
+// VIZUAl
+if (x==0)
+{
+     lectiix=ModProfesor->Lectii_List->Position->X;
+previewx=ModProfesor->Preview->Position->X;
+x=1;
+}
+Top_Bar->Position->Y=-150;
+Title->Position->Y=-150;
+Lectii_List->Position->X=-500;
+PreviewBox->Position->X=2000;
+Prev_Next->Opacity=0;
+Prev_Back->Opacity=0;
+Prev_Back->Enabled=0;
+Low_Bar->Opacity=0;
+Adaugare_Lectie->Opacity=0;
+Modificare_Lectie->Opacity=0;
+Stergere_Lectie->Opacity=0;
+Modificare_Test->Opacity=0;
+Preview->Opacity=0;
+In->Enabled=1;
+
+
+//  FUNCTIONALITATE
+
+char temp[300],tempx[300];
+//INCARCARE LISTA LECTII
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Lectii.res");
+
+Lectii_List->Items->LoadFromFile(tempx);
+Lectii_List->ItemIndex=0;
+
+
+//NR LECTII & PATH
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Lectii.res");
+ifstream f(tempx);
+f.get(temp,100);
+strcpy(path,Meniu1->login_path);
+strcat(path,"Lectii/");
+strcat(path,temp);
+strcat(path,"/");
+strcpy(temp,path);
+strcat(temp,"1.res");
+
+ifstream check(temp);
+if (check)
+{
+check.close();
+PreviewBox->Lines->LoadFromFile(temp);
+}
+else check.close();
+
+total=0;
+while (!f.eof())
+{
+f.getline(temp,100);
+total++;
+}
+
+f.close();
+
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Nr_Lectii.res");
+ofstream g(tempx);
+total--;
+g<<total;
+g.close();
+
+strcpy(temp,path);
+	strcat(temp,"Pagini.res");
+	   ifstream fin(temp);
+	   fin>>pg_tot;
+	   fin.close();
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::InTimer(TObject *Sender)
+{
+
+Top_Bar->AnimateFloat("Position.Y",0);
+Title->AnimateFloat("Position.Y",0);
+Lectii_List->AnimateFloat("Position.X",lectiix);
+PreviewBox->AnimateFloat("Position.X",previewx);
+Prev_Next->AnimateFloat("Opacity",1);
+Low_Bar->AnimateFloat("Opacity",1);
+Adaugare_Lectie->AnimateFloat("Opacity",1);
+Modificare_Lectie->AnimateFloat("Opacity",1);
+Stergere_Lectie->AnimateFloat("Opacity",1);
+Modificare_Test->AnimateFloat("Opacity",1);
+Preview->AnimateFloat("Opacity",1);
+In->Enabled=0;
+//x=0;
+}
+//---------------------------------------------------------------------------
+//IESIRE APP
+void __fastcall TModProfesor::ExitClick(TObject *Sender)
+{
+exit(); Top_Bar->AnimateFloat("Position.Y",-500);
+Title->AnimateFloat("Position.Y",-500);
+OutX->Enabled=1; x=0;
+char tempx[100];
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Nr_Lectii.res");
+remove(tempx);
+}
+
+void __fastcall TModProfesor::OutXTimer(TObject *Sender)
+{
+Meniu1->Close();
+OutX->Enabled=0;
+}
+//---------------------------------------------------------------------------
+
+ //ADAUGARE LECTIE
+void __fastcall TModProfesor::Adaugare_LectieClick(TObject *Sender)
+{
+exit(); Title->AnimateFloat("Position.Y",-500);
+OutAdd->Enabled=1;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::OutAddTimer(TObject *Sender)
+{
+
+AdaugareLectie->Show();
+ModProfesor->Close();
+OutAdd->Enabled=0;
+
+}
+//---------------------------------------------------------------------------
+
+
+//// MAKE PREVIEW WORK
+
+// First page
+
+void __fastcall TModProfesor::Lectii_ListClick(TObject *Sender)
+{
+
+int i; pathc=1;
+char temp[100];
+strcpy(temp,Meniu1->login_path);
+for (i = 0; i < total; i++)
+{
+	 if (Lectii_List->ItemIndex==i)
+	 {
+		strcpy(temp,Meniu1->login_path);
+		strcat(temp,"Lectii/Lectii.res");
+	   ifstream fin(temp);
+	   for (int j = 1; j <= 30; j++)
+	   {
+			fin.get(temp,100); fin.get();
+			if (i+1==j) break;
+	   }
+	   strcpy(path,Meniu1->login_path);
+	   strcat(path,"Lectii/");
+	   strcat(path,temp);
+	   strcat(path,"/");
+	   strcpy(temp,path);
+	   strcat(temp,"1.res");
+	   PreviewBox->Lines->LoadFromFile(temp);
+	   strcpy(temp,path);
+	   strcat(temp,"Pagini.res");
+	   ifstream f(temp);
+	   f>>pg_tot;
+	   f.close();
+	   Prev_Next->Enabled=1;
+	   Prev_Back->Enabled=0;
+	   Prev_Back->AnimateFloat("Opacity",0);
+	   break;
+
+     }
+}
+}
+//---------------------------------------------------------------------------
+
+ // Next page
+
+void __fastcall TModProfesor::Prev_NextClick(TObject *Sender)
+{
+char temp[100],numar[100];
+pathc++;
+if (pathc==2)
+{
+	Prev_Back->AnimateFloat("Opacity",1);
+	Prev_Back->Enabled=1;
+}
+if (pathc==pg_tot)
+{
+	Prev_Next->AnimateFloat("Opacity",0);
+	Prev_Next->Enabled=0;
+}
+strcpy(temp,path);
+strcat(temp,itoa(pathc,numar,10));
+strcat(temp,".res");
+PreviewBox->Lines->LoadFromFile(temp);
+}
+//---------------------------------------------------------------------------
+
+  // Prev Page
+
+void __fastcall TModProfesor::Prev_BackClick(TObject *Sender)
+{
+char temp[100],numar[100];
+pathc--;
+if (pathc==1)
+{
+	Prev_Back->AnimateFloat("Opacity",0);
+	Prev_Back->Enabled=0;
+}
+Prev_Next->AnimateFloat("Opacity",1);
+Prev_Next->Enabled=1;
+strcpy(temp,path);
+strcat(temp,itoa(pathc,numar,10));
+strcat(temp,".res");
+PreviewBox->Lines->LoadFromFile(temp);
+}
+//---------------------------------------------------------------------------
+////
+
+//BUTTON ANIMATIONS
+
+void __fastcall TModProfesor::Prev_BackMouseEnter(TObject *Sender)
+{
+if (pathc!=1)
+Prev_Back->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Prev_BackMouseLeave(TObject *Sender)
+{
+if (pathc!=1)
+Prev_Back->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TModProfesor::Prev_NextMouseEnter(TObject *Sender)
+{
+if (pathc!=pg_tot)
+Prev_Next->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Prev_NextMouseLeave(TObject *Sender)
+{
+if (pathc!=pg_tot)
+Prev_Next->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+
+
+
+void __fastcall TModProfesor::Adaugare_LectieMouseEnter(TObject *Sender)
+{
+Adaugare_Lectie->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Adaugare_LectieMouseLeave(TObject *Sender)
+{
+Adaugare_Lectie->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_LectieMouseEnter(TObject *Sender)
+{
+Modificare_Lectie->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_LectieMouseLeave(TObject *Sender)
+{
+Modificare_Lectie->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Stergere_LectieMouseEnter(TObject *Sender)
+{
+Stergere_Lectie->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Stergere_LectieMouseLeave(TObject *Sender)
+{
+Stergere_Lectie->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_TestMouseEnter(TObject *Sender)
+{
+Modificare_Test->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_TestMouseLeave(TObject *Sender)
+{
+Modificare_Test->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Stergere_LectieClick(TObject *Sender)
+{
+int i,x;
+char tempx[300];
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Nr_Lectii.res");
+ifstream f(tempx);
+int l=0;
+f>>l;
+f.close();
+
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Nr_Lectii.res");
+ofstream g(tempx);
+g<<l-1;
+g.close();
+
+for (i=0; i <= l; i++)
+{
+   if (Lectii_List->ItemIndex==i)
+		x=i;
+}
+char temp[200];
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Lectii.res");
+ifstream ff(tempx);
+ff.get(temp,100);
+strcpy(path,Meniu1->login_path);
+strcat(path,"Lectii/");
+strcat(path,temp);
+strcat(path,"/");
+strcat(path,"1.res");
+ff.close();
+PreviewBox->Lines->LoadFromFile(path);
+//
+ifstream fin(tempx);
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/temp.res");
+ofstream fout(tempx);
+char a[200][200],backup[300];
+for (i = 1; i < l+1; i++)
+{
+   fin.get(a[i],200);
+   fin.get();
+   if (i==x+1) strcpy(backup,a[i]);
+   if (strcmp(a[x+1],a[i])!=0)
+		fout<<a[i]<<"\n";
+}
+fin.get(a[l+1],300);
+   fin.get();
+   if (l+1==x+1) strcpy(backup,a[l+1]);
+   if (strcmp(a[x+1],a[l+1])!=0)
+		fout<<a[l+1];
+
+fin.close();
+fout.close();
+//
+strcpy(tempx,Meniu1->login_path);
+strcat(tempx,"Lectii/Lectii.res");
+remove (tempx);
+char tempy[300];
+strcpy(tempy,Meniu1->login_path);
+strcat(tempy,"Lectii/temp.res");
+rename (tempy, tempx);
+
+
+char dir[300],aux[4];
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+
+for (int i=1; i < 30; i++)
+{
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/");
+strcat(dir,itoa(i,aux,10));
+strcat(dir,".res");
+remove(dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/");
+strcat(dir,itoa(i,aux,10));
+strcat(dir,".jpg");
+remove(dir);
+}
+
+for (int i=1; i < 30; i++)
+{
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Test/");
+strcat(dir,itoa(i,aux,10));
+strcat(dir,".res");
+remove(dir);
+}
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Test/ok.res");
+remove(dir);
+
+//NOT SURE
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Test/rezultat.res");
+remove(dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Test/Pagini.res");
+remove(dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Test");
+rmdir(dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+strcat(dir,"/Pagini.res");
+remove(dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/");
+strcat(dir,backup);
+rmdir (dir);
+
+strcpy(dir,Meniu1->login_path);
+strcat(dir,"Lectii/Lectii.res");
+Lectii_List->Items->LoadFromFile(dir);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_LectieClick(TObject *Sender)
+{
+char a[200];
+for (int i=0; i <=30; i++)
+{
+	if (Lectii_List->ItemIndex==i)
+	{
+		strcpy(a,Meniu1->login_path);
+		strcat(a,"Lectii/Lectii.res");
+	   ifstream fin(a);
+	   for (int j = 1; j <= 30; j++)
+	   {
+	   fin.get(a,100);  fin.get();
+	   if (i+1==j) break;
+	   }
+	   fin.close();
+	}
+}
+strcpy(titlu,a);
+strcpy(locatie,Meniu1->login_path);
+strcat(locatie,"Lectii/");
+strcat(locatie,a);
+strcat(locatie,"/");
+ModificareLectie->Show();
+ModProfesor->Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Modificare_TestClick(TObject *Sender)
+{
+char a[100];
+for (int i=0; i <=30; i++)
+{
+	if (Lectii_List->ItemIndex==i)
+	{
+		strcpy(a,Meniu1->login_path);
+		strcat(a,"Lectii/Lectii.res");
+	   ifstream fin(a);
+	   for (int j = 1; j <= 30; j++)
+	   {
+	   fin.get(a,100); fin.get();
+	   if (i+1==j) break;
+	   }
+	}
+}
+strcpy(titlu,a);
+strcpy(locatie,Meniu1->login_path);
+strcat(locatie,"Lectii/");
+strcat(locatie,a);
+strcat(locatie,"/Test");
+strcpy(previewpath,Meniu1->login_path);
+strcat(previewpath,a);
+ModProfesor->Close();
+CreareTest->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModProfesor::Finalizare_BGClick(TObject *Sender)
+{
+Meniu1->Show();
+ModProfesor->Close();
+}
+//---------------------------------------------------------------------------
+

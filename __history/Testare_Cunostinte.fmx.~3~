@@ -1,0 +1,89 @@
+object TestareCunostinte: TTestareCunostinte
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 556
+  ClientWidth = 946
+  Fill.Color = xFFABBCC9
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  FullScreen = True
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object Top_Bar: TRectangle
+    Align = Scale
+    Fill.Color = xFF1B7CCC
+    Position.X = -58.000019073486330000
+    Size.Width = 1004.000000000000000000
+    Size.Height = 67.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claNull
+    object Title: TLabel
+      Align = Scale
+      StyledSettings = [FontColor]
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 756.000061035156300000
+      Size.Width = 292.999816894531300000
+      Size.Height = 76.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Calibri'
+      TextSettings.Font.Size = 72.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.WordWrap = False
+      Text = 'Test'
+    end
+  end
+  object Intrebare: TGroupBox
+    Align = Scale
+    Position.X = 32.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 441.000000000000000000
+    Size.Height = 297.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Intrebare'
+    TabOrder = 1
+    object R1: TRadioButton
+      Align = Scale
+      Position.X = 18.327272415161130000
+      Position.Y = 40.000000000000000000
+      Size.Width = 358.527252197265600000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'R1'
+    end
+    object R2: TRadioButton
+      Align = Scale
+      Position.X = 18.327272415161130000
+      Position.Y = 104.000000000000000000
+      Size.Width = 358.527252197265600000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'R1'
+    end
+    object R3: TRadioButton
+      Align = Scale
+      Position.X = 18.327272415161130000
+      Position.Y = 168.000000000000000000
+      Size.Width = 358.527252197265600000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'R1'
+    end
+    object R4: TRadioButton
+      Align = Scale
+      Position.X = 18.327272415161130000
+      Position.Y = 232.000000000000000000
+      Size.Width = 358.527252197265600000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'R1'
+    end
+  end
+end

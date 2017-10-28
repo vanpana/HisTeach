@@ -1,0 +1,41 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#ifdef _WIN32
+#include <tchar.h>
+#endif
+#pragma hdrstop
+#include <System.StartUpCopy.hpp>
+//---------------------------------------------------------------------------
+USEFORM("Meniu.cpp", Meniu1);
+USEFORM("Mod_Profesor.cpp", ModProfesor);
+USEFORM("Adaugare_Lectie.cpp", ModificareLectie);
+//---------------------------------------------------------------------------
+extern "C" int FMXmain()
+{
+	try
+	{
+		Application->Initialize();
+		Application->CreateForm(__classid(TMeniu1), &Meniu1);
+		Application->CreateForm(__classid(TModProfesor), &ModProfesor);
+		Application->CreateForm(__classid(TModificareLectie), &ModificareLectie);
+		Application->Run();
+	}
+	catch (Exception &exception)
+	{
+		Application->ShowException(&exception);
+	}
+	catch (...)
+	{
+		try
+		{
+			throw Exception("");
+		}
+		catch (Exception &exception)
+		{
+			Application->ShowException(&exception);
+		}
+	}
+	return 0;
+}
+//---------------------------------------------------------------------------

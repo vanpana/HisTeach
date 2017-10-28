@@ -1,0 +1,421 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Mod_Profesor.h"
+#include "Adaugare_Lectie.h"
+#include "PopUp_Creare.h"
+#include "Meniu.h"
+#include "Modificare_Lectie.h"
+#include "System.IOUtils.hpp"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TModificareLectie *ModificareLectie;
+char lectii[3],nume[50];
+int pg_cur,pg_tot,OK=1;
+int cap[100],cap_tot=1,cap_cur=1;
+char cap_nume[100][100];
+//---------------------------------------------------------------------------
+__fastcall TModificareLectie::TModificareLectie(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TModificareLectie::FormActivate(TObject *Sender)
+{
+if (OK)
+{
+Finalizare_TXT->Opacity=0;
+Imagine->Visible=0;
+Titlu->Text="";
+Lectie->Lines->Clear();
+pg_cur=1;
+char aux[100];
+//strcpy(aux,Meniu1->login_path);
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/1.res");
+Lectie->Lines->LoadFromFile(aux,System::Sysutils::TEncoding::UTF8);
+//strcpy(aux,Meniu1->login_path);
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/1.jpg");
+ifstream f(aux);
+if (f)
+{
+f.close();
+Imagine->Bitmap->LoadFromFile(aux);
+}
+else f.close();
+
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/1.jpg");
+
+	ifstream ff(aux);
+	if (ff) {ff.close(); Imagine->Bitmap->LoadFromFile(aux); Imagine->Visible=1;}
+	else	{ff.close(); Imagine->Visible=0;}
+
+Titlu->Text=ModProfesor->titlu;
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/Pagini.res");
+ifstream f2(aux);
+f2>>pg_tot;
+f2.close();
+
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/Capitole_Pg.res");
+ifstream pg(aux);
+
+strcpy(aux,ModProfesor->locatie);
+strcat(aux,"/Capitole_Tit.res");
+ifstream tit(aux);
+
+int i=1;
+while(pg>>cap[i]) { tit.getline(cap_nume[i],100); Chap->Items->Add(cap_nume[i]); i++;}
+pg.close();
+tit.close();
+
+Chap->ItemIndex=0;
+
+OK=0;
+}
+}
+//---------------------------------------------------------------------------
+void __fastcall TModificareLectie::NextClick(TObject *Sender)
+{
+Lectie->SelStart=0;
+if (Lectie->Lines->Text!="")
+{
+	char temp[100],numar[10];
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+
+	if (pg_cur == pg_tot){
+		pg_tot++;  Lectie->Lines->Clear();   }
+
+	else if (pg_cur+1 == cap[cap_cur+1])
+	{
+		int i;
+		for (i=cap_cur+1; i<=cap_tot; i++)
+			cap[i]=cap[i]+1;
+
+		pg_tot++;  Lectie->Lines->Clear();
+
+		/*strcpy(temp,Meniu1->login_path);
+		strcat(temp,"Lectii/Temp/");
+		strcat(temp,itoa(pg_tot,numar,10));
+		strcat(temp,".res");
+		ofstream outp(temp);
+		outp<<" ";
+		outp.close();   */
+
+		for (i=pg_tot;i>pg_cur+1;i--)
+		{
+
+			char nou[300],vechi[300];
+			strcpy(vechi,Meniu1->login_path);
+			strcat(vechi,"Lectii/Temp/");
+			strcat(vechi,itoa(i-1,numar,10));
+			strcat(vechi,".res");
+
+			strcpy(nou,Meniu1->login_path);
+			strcat(nou,"Lectii/Temp/");
+			strcat(nou,itoa(i,numar,10));
+			strcat(nou,".res");
+
+			rename(vechi,nou);
+			remove(vechi);
+			if (i==pg_cur+2)
+			{
+              ofstream outp(vechi);
+		outp<<" ";
+		outp.close();
+			}
+		}
+
+	}
+
+	else
+	{
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur+1,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->LoadFromFile(temp,System::Sysutils::TEncoding::UTF8);
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,itoa(pg_cur+1,numar,10));
+	strcat(temp,".jpg");
+
+	ifstream f(temp);
+	if (f) {f.close(); Imagine->Bitmap->LoadFromFile(temp); Imagine->Visible=1;}
+	else	{f.close(); Imagine->Visible=0;}
+	}
+	pg_cur++;
+
+}
+
+}
+//---------------------------------------------------------------------------
+void __fastcall TModificareLectie::BackClick(TObject *Sender)
+{
+Lectie->SelStart=0;
+if (pg_cur-1>0 && pg_cur>cap[cap_cur])
+{
+	char temp[100],numar[10];
+	if (pg_cur == pg_tot)
+	{
+		if (Lectie->Lines->Text=="")
+			pg_tot--;
+		else
+		{
+            	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+        }
+	}
+
+	else{
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+		  }
+
+	pg_cur--;
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->LoadFromFile(temp,System::Sysutils::TEncoding::UTF8);
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".jpg");
+
+	ifstream f(temp);
+	if (f) { f.close(); Imagine->Bitmap->LoadFromFile(temp);
+	Imagine->Visible=1;}
+	else {f.close();Imagine->Visible=0;}
+}
+}
+//---------------------------------------------------------------------------
+void __fastcall TModificareLectie::Finalizare_BGClick(TObject *Sender)
+{
+char temp[100],numar[10];
+	if (pg_cur == pg_tot)
+	{
+	if (Lectie->Lines->Text!=""){
+	//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_tot,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,itoa(pg_tot,numar,10));
+	strcat(temp,".jpg");
+	 }
+	else pg_tot--;
+    }
+
+//SALVARE PAGINA CURENTA
+strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".jpg");
+
+//strcpy(temp,Meniu1->login_path);
+	strcpy(temp,ModProfesor->locatie);
+strcat(temp,"/Pagini.res");
+ofstream h(temp);
+h<<pg_tot;
+h.close();
+
+ShowMessage("Lectie salvata cu succes!");
+OK=1;
+ModProfesor->Show();
+ModificareLectie->Close();
+}
+//---------------------------------------------------------------------------
+void __fastcall TModificareLectie::Add_ImageClick(TObject *Sender)
+{
+OpenDialog1->Execute();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::OpenDialog1Close(TObject *Sender)
+{
+if (OpenDialog1->FileName!="")
+{
+char temp[300],numar[10];
+strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+strcat(temp,itoa(pg_cur,numar,10));
+strcat(temp,".jpg");
+TFile::Copy(OpenDialog1->FileName, temp,1);
+Imagine->Bitmap->LoadFromFile(temp);
+Imagine->Visible=1;
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::LectieKeyDown(TObject *Sender, WORD &Key, System::WideChar &KeyChar,
+          TShiftState Shift)
+{
+if (Key==37) BackClick(Sender); //back
+else if (Key==39) NextClick(Sender);//next
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FPlusClick(TObject *Sender)
+{
+Lectie->Font->Size=Lectie->Font->Size+3.0;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FMinusClick(TObject *Sender)
+{
+Lectie->Font->Size=Lectie->Font->Size-3.0;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::Finalizare_BGMouseEnter(TObject *Sender)
+{
+Finalizare_BG->AnimateFloat("Opacity",0.3);
+Finalizare_TXT->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::Finalizare_BGMouseLeave(TObject *Sender)
+{
+Finalizare_BG->AnimateFloat("Opacity",1);
+Finalizare_TXT->AnimateFloat("Opacity",0);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::NextMouseEnter(TObject *Sender)
+{
+Next->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::NextMouseLeave(TObject *Sender)
+{
+Next->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::BackMouseEnter(TObject *Sender)
+{
+Back->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::BackMouseLeave(TObject *Sender)
+{
+Back->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::Add_ImageMouseLeave(TObject *Sender)
+{
+Add_Image->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TModificareLectie::Add_ImageMouseEnter(TObject *Sender)
+{
+Add_Image->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FMinusMouseEnter(TObject *Sender)
+{
+FMinus->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FMinusMouseLeave(TObject *Sender)
+{
+FMinus->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FPlusMouseEnter(TObject *Sender)
+{
+FPlus->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TModificareLectie::FPlusMouseLeave(TObject *Sender)
+{
+FPlus->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TModificareLectie::ChapClosePopup(TObject *Sender)
+{
+char temp[300],numar[10];
+strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+strcat(temp,itoa(pg_cur,numar,10));
+strcat(temp,".res");
+ifstream check(temp );
+if (check)
+{
+check.close();
+
+if (Lectie->Lines->Text!="")
+{
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->SaveToFile(temp,System::Sysutils::TEncoding::UTF8);
+	Imagine->Visible=0;
+	Lectie->Lines->Clear();
+}
+
+cap_cur=Chap->ItemIndex+1;
+//ShowMessage(cap[cap_cur]);
+pg_cur=cap[cap_cur];
+
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".res");
+	Lectie->Lines->LoadFromFile(temp,System::Sysutils::TEncoding::UTF8);
+	strcpy(temp,ModProfesor->locatie);
+	strcat(temp,"/");
+	strcat(temp,itoa(pg_cur,numar,10));
+	strcat(temp,".jpg");
+
+}
+else check.close();
+}
+//---------------------------------------------------------------------------
+

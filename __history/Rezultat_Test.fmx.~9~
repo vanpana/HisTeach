@@ -1,0 +1,88 @@
+object RezultatTest: TRezultatTest
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 556
+  ClientWidth = 946
+  Fill.Color = xFFABBCC9
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  FullScreen = True
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object Top_Bar: TRectangle
+    Align = Scale
+    Fill.Color = xFF1B7CCC
+    Position.X = -58.000019073486330000
+    Size.Width = 1004.000000000000000000
+    Size.Height = 67.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claNull
+    object Title: TLabel
+      Align = Scale
+      StyledSettings = [FontColor]
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 756.000061035156300000
+      Size.Width = 292.999816894531300000
+      Size.Height = 76.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Calibri'
+      TextSettings.Font.Size = 72.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.WordWrap = False
+      Text = 'Rezultat'
+    end
+  end
+  object Rezultat: TLabel
+    Align = Scale
+    Position.X = 32.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Rezultat'
+  end
+  object RGresit: TLabel
+    Align = Scale
+    Position.X = 32.000000000000000000
+    Position.Y = 152.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Ai raspuns gresit la:'
+  end
+  object Intrebare: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 2
+    Position.X = 32.000000000000000000
+    Position.Y = 192.000000000000000000
+    Size.Width = 697.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object RCorect: TLabel
+    Align = Scale
+    Position.X = 32.000000000000000000
+    Position.Y = 248.000000000000000000
+    Size.Width = 289.000000000000000000
+    Size.Height = 57.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Raspunsul corect era in pasajul:'
+  end
+  object RCorectMemo: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    Align = Scale
+    Position.X = 32.000000000000000000
+    Position.Y = 288.000000000000000000
+    Size.Width = 697.000000000000000000
+    Size.Height = 233.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    ReadOnly = True
+    TextSettings.WordWrap = True
+  end
+end

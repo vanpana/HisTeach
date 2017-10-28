@@ -1,0 +1,49 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Ajutor.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TAjutor1 *Ajutor1;
+int cur=1;
+//---------------------------------------------------------------------------
+__fastcall TAjutor1::TAjutor1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TAjutor1::FormActivate(TObject *Sender)
+{
+Ajutor1->AnimateColor("Fill.Color", 0xff1b7ccc);
+Text->Lines->LoadFromFile("Ajutor/1.res");
+Imagine->Bitmap->LoadFromFile("Ajutor/1.gif");
+}
+//---------------------------------------------------------------------------
+void __fastcall TAjutor1::NextClick(TObject *Sender)
+{
+cur++;
+
+char temp[300],numar[10];
+strcpy(temp,"Ajutor/");
+strcat(temp,itoa(cur,numar,10));
+strcat(temp,".res");
+Text->Lines->LoadFromFile(temp);
+
+strcpy(temp,"Ajutor/");
+strcat(temp,itoa(cur,numar,10));
+strcat(temp,".gif");
+Imagine->Bitmap->LoadFromFile(temp);
+
+if (cur==7) Ajutor1->AnimateColor("Fill.Color", 0xFF8EBA20);
+if (cur==9) Ajutor1->Close();
+
+}
+//---------------------------------------------------------------------------

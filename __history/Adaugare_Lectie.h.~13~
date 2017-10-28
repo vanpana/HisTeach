@@ -1,0 +1,57 @@
+//---------------------------------------------------------------------------
+
+#ifndef Adaugare_LectieH
+#define Adaugare_LectieH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Objects.hpp>
+#include <FMX.StdCtrls.hpp>
+#include <FMX.Types.hpp>
+#include <FMX.Controls.Presentation.hpp>
+#include <FMX.Dialogs.hpp>
+#include <FMX.Edit.hpp>
+#include <FMX.ExtCtrls.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.Memo.hpp>
+//---------------------------------------------------------------------------
+class TAdaugareLectie : public TForm
+{
+__published:	// IDE-managed Components
+	TRectangle *Top_Bar;
+	TLabel *Title;
+	TImage *Exit;
+	TEdit *Edit1;
+	TMemo *Memo1;
+	TImage *Add_Image;
+	TOpenDialog *OpenDialog1;
+	TImage *Imagine;
+	TImage *Back;
+	TImage *Next;
+	void __fastcall Add_ImageClick(TObject *Sender);
+	void __fastcall OpenDialog1Close(TObject *Sender);
+	void __fastcall Add_ImageMouseEnter(TObject *Sender);
+	void __fastcall Add_ImageMouseLeave(TObject *Sender);
+	void __fastcall ExitClick(TObject *Sender);
+	void __fastcall NextMouseEnter(TObject *Sender);
+	void __fastcall NextMouseLeave(TObject *Sender);
+	void __fastcall BackMouseEnter(TObject *Sender);
+	void __fastcall BackMouseLeave(TObject *Sender);
+	void __fastcall ExitMouseEnter(TObject *Sender);
+	void __fastcall ExitMouseLeave(TObject *Sender);
+private:
+
+void exit ()
+{
+	Title->AnimateFloat("Position.Y",-500);
+
+}
+	// User declarations
+public:		// User declarations
+	__fastcall TAdaugareLectie(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TAdaugareLectie *AdaugareLectie;
+//---------------------------------------------------------------------------
+#endif

@@ -1,0 +1,26 @@
+//---------------------------------------------------------------------------
+
+#ifndef Lista_ProfH
+#define Lista_ProfH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.ListBox.hpp>
+#include <FMX.Types.hpp>
+#include <FMX.Objects.hpp>
+//---------------------------------------------------------------------------
+class TListaProf : public TForm
+{
+__published:	// IDE-managed Components
+	TListBox *ListBox1;
+	TImage *Check_Cont;
+private:	// User declarations
+public:		// User declarations
+	__fastcall TListaProf(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TListaProf *ListaProf;
+//---------------------------------------------------------------------------
+#endif

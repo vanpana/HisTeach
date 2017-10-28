@@ -1,0 +1,31 @@
+object ListaProf: TListaProf
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  Caption = 'Form1'
+  ClientHeight = 387
+  ClientWidth = 367
+  Fill.Color = xFF8EBA20
+  Fill.Kind = Solid
+  Position = DesktopCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object ListBox1: TListBox
+    Align = Scale
+    Position.X = 6.500000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 369.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    ShowScrollBars = False
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    ShowCheckboxes = True
+    Sorted = True
+  end
+end

@@ -1,0 +1,1 @@
+In continuare, ni se va deschide meniul elevului. Acesta contine o lista a tuturor lectiilor, 2 butoane si 2 sageti care ne permit sa navigam printre lectiile profesorilor selectati anterior.

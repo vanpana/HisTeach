@@ -1,0 +1,140 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Testare_Cunostinte.h"
+#include "Mod_Elev.h"
+#include "Mod_Profesor.h"
+#include "Meniu.h"
+#include "Rezultat_Test.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TRezultatTest *RezultatTest;
+char rezultat[300],rcorect[500];
+int OK=0,pg_cur=1,pg_tot=1,pg_cor=1;
+//---------------------------------------------------------------------------
+__fastcall TRezultatTest::TRezultatTest(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TRezultatTest::FormActivate(TObject *Sender)
+{
+if (OK==0)
+{
+
+	Back->Opacity=0;
+	int i;
+	char temp[500];
+	ofstream g("temp.res");
+	g<<"Ai obtinut nota: ";
+	g<<float(TestareCunostinte->nota);
+	g.close();
+	ifstream f("temp.res");
+	f.get(rezultat,100);
+	f.close();
+    Rezultat->Text=rezultat;
+
+	strcpy(temp,ModElev->locatie);
+	strcat(temp,"Test/Pagini.res");
+	ifstream ff(temp);
+	ff>>pg_tot;
+	ff.close();
+
+	for (i=1;i<=pg_tot;i++)
+	{
+		if (TestareCunostinte->corect[i]==0)
+			break;
+	}
+	pg_cur=i;
+	Intrebare->Text=TestareCunostinte->intrebare[pg_cur].intrebare;
+
+	afisare(pg_cur);
+	remove("temp.res");
+	OK=1;
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRezultatTest::NextClick(TObject *Sender)
+{
+int i;
+//pg_tot--;
+for (i=pg_cur+1;i<=pg_tot;i++)
+	{
+		if (TestareCunostinte->corect[i]==0)
+			break;
+	}
+
+
+if (i<=pg_tot)
+{
+pg_cor++;
+if (pg_cor==1) Back->Opacity=0;
+else Back->AnimateFloat("Opacity",1);
+
+pg_cur=i;
+Intrebare->Text=TestareCunostinte->intrebare[pg_cur].intrebare;
+afisare(pg_cur);
+//remove("temp.res");
+}
+
+else
+{
+	RezultatTest->Close();
+	OK=0;
+	ModElev->Show();
+}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRezultatTest::BackClick(TObject *Sender)
+{
+int i;
+for (i=pg_cur-1;i>=1;i--)
+	{
+		if (TestareCunostinte->corect[i]==0)
+			break;
+	}
+pg_cor--;
+if (pg_cor==1) Back->AnimateFloat("Opacity",0);
+pg_cur=i;
+Intrebare->Text=TestareCunostinte->intrebare[pg_cur].intrebare;
+afisare(pg_cur);
+remove("temp.res");
+//conditite de iesire
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TRezultatTest::NextMouseEnter(TObject *Sender)
+{
+Next->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRezultatTest::NextMouseLeave(TObject *Sender)
+{
+Next->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRezultatTest::BackMouseEnter(TObject *Sender)
+{
+Back->AnimateFloat("Opacity",0.3);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRezultatTest::BackMouseLeave(TObject *Sender)
+{
+Back->AnimateFloat("Opacity",1);
+}
+//---------------------------------------------------------------------------
+

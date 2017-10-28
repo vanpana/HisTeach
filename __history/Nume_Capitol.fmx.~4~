@@ -1,0 +1,52 @@
+object NumeCapitol: TNumeCapitol
+  Left = 0
+  Top = 0
+  BorderIcons = []
+  BorderStyle = None
+  Caption = 'Form1'
+  ClientHeight = 158
+  ClientWidth = 371
+  Fill.Color = xFF8EBA20
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Text: TLabel
+    Align = Scale
+    StyledSettings = [FontColor]
+    Position.X = 32.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 313.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 31.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Introdu titlul capitolului'
+  end
+  object NumeCap: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 1
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 18.000000000000000000
+    Position.X = 34.000000000000000000
+    Position.Y = 58.000000000000000000
+    Size.Width = 303.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [Style, FontColor]
+  end
+  object da: TButton
+    Align = Scale
+    Position.X = 284.000000000000000000
+    Position.Y = 116.000000000000000000
+    Size.Width = 52.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Text = 'Da'
+    OnClick = daClick
+  end
+end

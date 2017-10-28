@@ -1,0 +1,29 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#include <string.h>
+#include <fstream>
+#include <stdlib.h>
+#include <cstring>
+#include <direct.h>
+#pragma hdrstop
+
+#include "Ajutor.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.fmx"
+TAjutor1 *Ajutor1;
+int cur=1;
+//---------------------------------------------------------------------------
+__fastcall TAjutor1::TAjutor1(TComponent* Owner)
+	: TForm(Owner)
+{
+}
+//---------------------------------------------------------------------------
+void __fastcall TAjutor1::FormActivate(TObject *Sender)
+{
+Ajutor1->AnimateColor("Fill.Color", 0xff1b7ccc);
+Text->Lines->LoadFromFile("Ajutor/1.res");
+Imagine->Bitmap->LoadFromFile("Ajutor/1.gif");
+}
+//---------------------------------------------------------------------------

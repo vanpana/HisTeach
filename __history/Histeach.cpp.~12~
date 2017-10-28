@@ -1,0 +1,55 @@
+//---------------------------------------------------------------------------
+
+#include <fmx.h>
+#ifdef _WIN32
+#include <tchar.h>
+#endif
+#pragma hdrstop
+#include <System.StartUpCopy.hpp>
+//---------------------------------------------------------------------------
+USEFORM("Modificare_Lectie.cpp", ModificareLectie);
+USEFORM("Meniu.cpp", Meniu1);
+USEFORM("Mod_Elev.cpp", ModElev);
+USEFORM("PopUp_Creare.cpp", PopUpCreare);
+USEFORM("Mod_Profesor.cpp", ModProfesor);
+USEFORM("Creare_Test.cpp", CreareTest);
+USEFORM("Adaugare_Lectie.cpp", AdaugareLectie);
+USEFORM("Lista_Prof.cpp", ListaProf);
+USEFORM("Parcurgere_Lectie.cpp", ParcurgereLectie);
+USEFORM("Testare_Cunostinte.cpp", TestareCunostinte);
+//---------------------------------------------------------------------------
+extern "C" int FMXmain()
+{
+	try
+	{
+		Application->Initialize();
+		Application->CreateForm(__classid(TMeniu1), &Meniu1);
+		Application->CreateForm(__classid(TModProfesor), &ModProfesor);
+		Application->CreateForm(__classid(TAdaugareLectie), &AdaugareLectie);
+		Application->CreateForm(__classid(TPopUpCreare), &PopUpCreare);
+		Application->CreateForm(__classid(TListaProf), &ListaProf);
+		Application->CreateForm(__classid(TModificareLectie), &ModificareLectie);
+		Application->CreateForm(__classid(TCreareTest), &CreareTest);
+		Application->CreateForm(__classid(TModElev), &ModElev);
+		Application->CreateForm(__classid(TParcurgereLectie), &ParcurgereLectie);
+		Application->CreateForm(__classid(TTestareCunostinte), &TestareCunostinte);
+		Application->Run();
+	}
+	catch (Exception &exception)
+	{
+		Application->ShowException(&exception);
+	}
+	catch (...)
+	{
+		try
+		{
+			throw Exception("");
+		}
+		catch (Exception &exception)
+		{
+			Application->ShowException(&exception);
+		}
+	}
+	return 0;
+}
+//---------------------------------------------------------------------------

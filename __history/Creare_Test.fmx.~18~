@@ -1,0 +1,343 @@
+object CreareTest: TCreareTest
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 553
+  ClientWidth = 982
+  Fill.Color = xFFBFC9AA
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  FullScreen = True
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object Top_Bar: TRectangle
+    Align = Scale
+    Fill.Color = xFF8EBA20
+    Position.X = -22.000000000000000000
+    Size.Width = 1004.000000000000000000
+    Size.Height = 67.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claNull
+  end
+  object Titlu: TLabel
+    Align = Scale
+    StyledSettings = [FontColor]
+    Position.X = 11.000000000000000000
+    Position.Y = 3.000000000000000000
+    Size.Width = 358.000000000000000000
+    Size.Height = 70.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 72.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Creare Test'
+  end
+  object Intrebare: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 0
+    Position.X = 24.000000000000000000
+    Position.Y = 80.000000000000000000
+    Size.Width = 921.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Intrebare'
+  end
+  object R1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 1
+    Position.X = 24.000000000000000000
+    Position.Y = 152.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Varianta 1'
+  end
+  object R2: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 2
+    Position.X = 24.000000000000000000
+    Position.Y = 200.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Varianta 2'
+  end
+  object R3: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 3
+    Position.X = 24.000000000000000000
+    Position.Y = 248.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Varianta 3'
+  end
+  object R4: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 4
+    Position.X = 24.000000000000000000
+    Position.Y = 296.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Varianta 4'
+  end
+  object RC: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 5
+    Position.X = 416.000000000000000000
+    Position.Y = 344.000000000000000000
+    Size.Width = 57.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'R. Corect'
+  end
+  object PreviewBox: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    Align = Scale
+    Position.X = 542.000000000000000000
+    Position.Y = 164.000000000000000000
+    Size.Width = 351.000000000000000000
+    Size.Height = 299.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    CanFocus = False
+    DisableMouseWheel = True
+    MaxLength = 450
+    ReadOnly = True
+    ShowScrollBars = False
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 30.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.WordWrap = True
+    StyledSettings = [FontColor]
+  end
+  object Preview: TLabel
+    Align = Scale
+    StyledSettings = [FontColor]
+    Position.X = 542.000000000000000000
+    Position.Y = 142.000000000000000000
+    Size.Width = 169.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 22.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Preview'
+  end
+  object Prev_Back: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 542.000000000000000000
+    Position.Y = 461.000000000000000000
+    Size.Width = 58.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = Prev_BackClick
+  end
+  object Prev_Next: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 835.000000000000000000
+    Position.Y = 461.000000000000000000
+    RotationAngle = 180.000000000000000000
+    Size.Width = 58.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = Prev_NextClick
+  end
+  object RP: TGroupBox
+    Align = Scale
+    Position.X = 280.000000000000000000
+    Position.Y = 392.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 89.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Raspunsul se afla la:'
+    TabOrder = 6
+    object RSus: TRadioButton
+      Align = Scale
+      Position.Y = 16.000000000000000000
+      TabOrder = 2
+      Text = 'Inceputul paginii'
+    end
+    object RMij: TRadioButton
+      Align = Scale
+      Position.Y = 40.000000000000000000
+      TabOrder = 1
+      Text = 'Mijlocul paginii'
+    end
+    object RJos: TRadioButton
+      Align = Scale
+      Position.Y = 64.000000000000000000
+      TabOrder = 0
+      Text = 'Sfarsitul paginii'
+    end
+  end
+  object Finalizare_BG: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          011C494441546843ED98E10D82400C46D1091CC10D740437316EE0088EE006C6
+          4D184137700437D036C504638B701C77DF91BEE40BFD41084DEE41DACA719C4E
+          16CDB5CD99B29112963BE528A54D4D798187DFF18B65732D9ED934A239B2A5AC
+          A484E549B949E93893A239329635652FA5C995F29012971D45FBF6B7C3F744C5
+          FF2368782368782368782368782368782368782368CCA69190C18A07A78B942A
+          BCB8E0054617BC38E00582C5819264F03A51B4812946F8D949996223F9B3414C
+          011F213E1EDA0B85849F956D9FD6673EEF9BE873FC5062F892DC0B8B31BE64F1
+          C222D497AC5E5884F892DD0B8B21BEC07861D1C717282F2CFEF902E98545972F
+          B05E5868BEC07B61D1F6A5082F2C3EBE14E585053B519C178E332FAAEA0D6970
+          F74F206A9E5F0000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Download-50.png'
+      end>
+    Align = Scale
+    Position.X = 920.000000000000000000
+    Position.Y = 496.000000000000000000
+    RotationAngle = -90.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 58.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = Finalizare_BGClick
+  end
+  object Next: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 347.000000000000000000
+    Position.Y = 477.000000000000000000
+    RotationAngle = 180.000000000000000000
+    Size.Width = 58.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = NextClick
+  end
+  object Back: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 278.000000000000000000
+    Position.Y = 477.000000000000000000
+    Size.Width = 58.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = BackClick
+  end
+  object curr: TLabel
+    Align = Scale
+    Position.X = 248.000000000000000000
+    Position.Y = 400.000000000000000000
+    Size.Width = 25.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    Text = '1'
+  end
+  object GoTo: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 12
+    Position.X = 408.000000000000000000
+    Position.Y = 440.000000000000000000
+    Size.Width = 41.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    OnTyping = GoToTyping
+  end
+  object din: TLabel
+    Align = Scale
+    StyledSettings = [Family, FontColor]
+    Position.X = 448.000000000000000000
+    Position.Y = 440.000000000000000000
+    Size.Width = 17.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 24.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = '/'
+  end
+  object From: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 11
+    ReadOnly = True
+    Position.X = 458.000000000000000000
+    Position.Y = 440.000000000000000000
+    Size.Width = 41.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+  end
+end

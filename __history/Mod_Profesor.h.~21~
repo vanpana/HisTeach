@@ -1,0 +1,84 @@
+//---------------------------------------------------------------------------
+
+#ifndef Mod_ProfesorH
+#define Mod_ProfesorH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <FMX.Controls.hpp>
+#include <FMX.Forms.hpp>
+#include <FMX.Objects.hpp>
+#include <FMX.Types.hpp>
+#include <FMX.Ani.hpp>
+#include <FMX.Layouts.hpp>
+#include <FMX.ListBox.hpp>
+#include <FMX.Memo.hpp>
+#include <FMX.StdCtrls.hpp>
+//---------------------------------------------------------------------------
+class TModProfesor : public TForm
+{
+__published:	// IDE-managed Components
+	TRectangle *Top_Bar;
+	TListBox *Lectii_List;
+	TRectangle *Low_Bar;
+	TImage *Exit;
+	TMemo *PreviewBox;
+	TLabel *Preview;
+	TImage *Prev_Back;
+	TImage *Prev_Next;
+	TImage *Modificare_Test;
+	TImage *Stergere_Lectie;
+	TImage *Adaugare_Lectie;
+	TImage *Modificare_Lectie;
+	TLabel *Title;
+	TTimer *In;
+	TTimer *OutX;
+	TTimer *OutAdd;
+	void __fastcall ExitClick(TObject *Sender);
+	void __fastcall FormActivate(TObject *Sender);
+	void __fastcall InTimer(TObject *Sender);
+	void __fastcall OutXTimer(TObject *Sender);
+	void __fastcall Adaugare_LectieClick(TObject *Sender);
+	void __fastcall OutAddTimer(TObject *Sender);
+	void __fastcall Lectii_ListClick(TObject *Sender);
+	void __fastcall Prev_NextClick(TObject *Sender);
+	void __fastcall Prev_BackClick(TObject *Sender);
+	void __fastcall Prev_BackMouseEnter(TObject *Sender);
+	void __fastcall Prev_BackMouseLeave(TObject *Sender);
+	void __fastcall Prev_NextMouseLeave(TObject *Sender);
+	void __fastcall Prev_NextMouseEnter(TObject *Sender);
+	void __fastcall Adaugare_LectieMouseEnter(TObject *Sender);
+	void __fastcall Adaugare_LectieMouseLeave(TObject *Sender);
+	void __fastcall Modificare_LectieMouseEnter(TObject *Sender);
+	void __fastcall Modificare_LectieMouseLeave(TObject *Sender);
+	void __fastcall Stergere_LectieMouseEnter(TObject *Sender);
+	void __fastcall Stergere_LectieMouseLeave(TObject *Sender);
+	void __fastcall Modificare_TestMouseEnter(TObject *Sender);
+	void __fastcall Modificare_TestMouseLeave(TObject *Sender);
+	void __fastcall Stergere_LectieClick(TObject *Sender);
+private:
+
+// User declarations
+public:
+
+float lectiix, previewx;
+void exit ()
+{
+Lectii_List->AnimateFloat("Position.X",-500);
+PreviewBox->AnimateFloat("Position.X",2000);
+Prev_Next->AnimateFloat("Opacity",0);
+Prev_Back->AnimateFloat("Opacity",0);
+Low_Bar->AnimateFloat("Opacity",0);
+Adaugare_Lectie->AnimateFloat("Opacity",0);
+Modificare_Lectie->AnimateFloat("Opacity",0);
+Stergere_Lectie->AnimateFloat("Opacity",0);
+Modificare_Test->AnimateFloat("Opacity",0);
+Preview->AnimateFloat("Opacity",0);
+}
+
+// User declarations
+	__fastcall TModProfesor(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TModProfesor *ModProfesor;
+//---------------------------------------------------------------------------
+#endif

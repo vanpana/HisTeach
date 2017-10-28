@@ -1,0 +1,125 @@
+object ParcurgereLectie: TParcurgereLectie
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 556
+  ClientWidth = 946
+  Fill.Color = xFFABBCC9
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  FullScreen = True
+  OnActivate = FormActivate
+  DesignerMasterStyle = 0
+  object Top_Bar: TRectangle
+    Align = Scale
+    Fill.Color = xFF1B7CCC
+    Position.X = -58.000019073486330000
+    Size.Width = 1004.000000000000000000
+    Size.Height = 67.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = claNull
+    object Title: TLabel
+      Align = Scale
+      StyledSettings = [FontColor]
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Position.X = 756.000061035156300000
+      Size.Width = 292.999816894531300000
+      Size.Height = 76.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Calibri'
+      TextSettings.Font.Size = 72.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.WordWrap = False
+      Text = 'Parcurgere'
+    end
+  end
+  object Titlu: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    Align = Scale
+    TabOrder = 2
+    Position.X = 10.999999046325680000
+    Position.Y = 88.000000000000000000
+    Size.Width = 910.000000000000000000
+    Size.Height = 55.000000000000000000
+    Size.PlatformDefault = False
+    TextPrompt = 'Introduceti titlu'
+  end
+  object Lectie: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    Align = Scale
+    Position.X = 14.999997138977050000
+    Position.Y = 160.000000000000000000
+    Size.Width = 714.000000000000000000
+    Size.Height = 345.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+  end
+  object Imagine: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Align = Scale
+    Position.X = 751.000000000000000000
+    Position.Y = 161.000000000000000000
+    Size.Width = 171.999816894531300000
+    Size.Height = 169.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+  end
+  object Next: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 679.000000000000000000
+    Position.Y = 501.000000000000000000
+    RotationAngle = 180.000000000000000000
+    Size.Width = 53.999877929687500000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = NextClick
+  end
+  object Back: TImage
+    MultiResBitmap.Height = 50
+    MultiResBitmap.Width = 50
+    MultiResBitmap = <
+      item
+        Width = 50
+        Height = 50
+        PNG = {
+          89504E470D0A1A0A0000000D49484452000000320000003208060000001E3F88
+          B1000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+          0099494441546843EDD9D10983301485E1D8093A8AA37683BA51BB896E506F24
+          174A40F0453907FF0F0EC1C79FF8960240D6B39DD66AC427F6DEBE4C65C4AFCD
+          32A68FC8BD6236F62296D818B340840A225410A182081544A8204205112A8838
+          DBA39D470DEDFC5763ECD45BF9C6FA5B996336BF5622461531AA8851458C2A62
+          5411A38A1855B788B17A7A4B7DCC14B39531D611A9C600B844292B6A63DB4D59
+          79F0730000000049454E44AE426082}
+        FileName = 'C:\Users\Vali\Downloads\Previous-50.png'
+      end>
+    Align = Scale
+    Position.X = 629.000000000000000000
+    Position.Y = 501.000000000000000000
+    Size.Width = 53.999908447265630000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    OnClick = BackClick
+  end
+end

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{44C9BDA5-526D-4068-BFD5-5B0E2BF89FC5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Histeach.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Histeach Mobile\HisTeach Mobile.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Histeach">
+        <MSBuild Projects="Histeach.cbproj"/>
+    </Target>
+    <Target Name="Histeach:Clean">
+        <MSBuild Projects="Histeach.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Histeach:Make">
+        <MSBuild Projects="Histeach.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="HisTeach Mobile">
+        <MSBuild Projects="..\Histeach Mobile\HisTeach Mobile.cbproj"/>
+    </Target>
+    <Target Name="HisTeach Mobile:Clean">
+        <MSBuild Projects="..\Histeach Mobile\HisTeach Mobile.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HisTeach Mobile:Make">
+        <MSBuild Projects="..\Histeach Mobile\HisTeach Mobile.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Histeach;HisTeach Mobile"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Histeach:Clean;HisTeach Mobile:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Histeach:Make;HisTeach Mobile:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
